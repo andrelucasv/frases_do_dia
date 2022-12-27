@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MaterialApp(
@@ -15,6 +16,31 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final _frases = [
+    "Que os dias bons se tornem rotina, e os ruins se tornem raros.",
+    "A disciplina é a mãe do êxito.",
+    "Mesmo que algo pareça difícil, nunca desista antes de tentar.",
+    "Você é o único que entende as suas dificuldades, por isso motive se a prosseguir.",
+    "Cada dificuldade ultrapassada te faz mais forte.",
+    "Da mesma forma que a felicidade não dura para sempre, a tristeza também não.",
+    "As dores não são eternas, se permita, o seu melhor é o suficiente.",
+    "Ser uma pessoa melhor é o objetivo do dia.",
+    "Para chegar em lugares maravilhosos, é necessário passar por caminhos difíceis.",
+    "O futuro ainda não chegou, seja grato pelo agora.",
+  ];
+
+  var _fraseGerada = "Clique abaixo para gerar uma frase!";
+
+  void _gerarFrase(){
+    var numeroSorteado = Random().nextInt(_frases.length);
+
+    setState(() {
+      _fraseGerada = _frases[numeroSorteado];
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,32 +60,32 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset("assets/images/logo.png"),
-            const Text(
-              "Clique abaixo para gerar uma frase!",
+            Text(
+              _fraseGerada,
               textAlign: TextAlign.justify,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
                 fontStyle: FontStyle.italic,
                 color: Colors.black
               ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: _gerarFrase,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.green)
                 ),
                 child: const Text(
                   "Nova Frase",
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.bold
                   ),
                 ),
-                ),
-          ],
+              ),
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
